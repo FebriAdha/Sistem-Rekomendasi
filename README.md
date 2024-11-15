@@ -1,5 +1,7 @@
 # Laporan Proyek Machine Learning - Febri Isthifa Adha
 
+![dataset cover](https://raw.githubusercontent.com/FebriAdha/Sistem-Rekomendasi-Destinasi-Wisata/refs/heads/main/images/dataset-cover.jpg)
+
 ## Project Overview
 
 ### Latar Belakang
@@ -37,6 +39,8 @@ Untuk mencapai goals yang telah ditetapkan, berikut adalah solusi yang akan dite
    - Melakukan pembuatan model sistem rekomendasi berbasis _Collaborative Filtering_ untuk merekomendasikan destinasi wisata berdasarkan perilaku pengguna dalam memberikan ulasan pada destinasi wisata.
 
 ## Data Understanding
+
+![dataset](https://raw.githubusercontent.com/FebriAdha/Sistem-Rekomendasi-Destinasi-Wisata/refs/heads/main/images/dataset.png)
 
 Dataset yang digunakan dalam proyek ini adalah dataset [Indonesia Tourism Destination](https://www.kaggle.com/datasets/aprabowo/indonesia-tourism-destination) yang diambil dari platfrom Kaggle. File yang digunakan berupa file csv, yaitu `tourism_ with _id.csv` dengan 437 baris dan 9 kolom, `tourism_rating.csv` dengan 10000 baris dengan 3 kolom, dan `user.csv` dengan 300 baris dan 3 kolom.
 
