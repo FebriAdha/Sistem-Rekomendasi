@@ -155,17 +155,23 @@ Kemudian dilakukan proses Exploratory Data Analysis (EDA) yang merupakan proses 
 
      Gambar 1. Distribusi Rating Destinasi Wisata.
 
+     Distribusi rating destinasi wisata pada grafik menunjukkan jumlah destinasi dengan rating 2 hingga 4 mendominasi, masing-masing mencapai sekitar 2000 destinasi. Destinasi dengan rating 1 lebih sedikit (~1750), sedangkan rating 5 sedikit di bawah distribusi tengah. Hal ini mencerminkan kualitas destinasi yang cukup merata, dengan peluang peningkatan agar lebih banyak destinasi mencapai rating terbaik.
+
    - Jumlah destinasi wisata menurut kategori
 
      ![Jumlah destinasi](https://raw.githubusercontent.com/FebriAdha/Sistem-Rekomendasi-Destinasi-Wisata/refs/heads/main/images/jumlah%20destinasi%20wisata.png)
 
      Gambar 2.  Jumlah destinasi wisata per kategori
 
+     Grafik ini menunjukkan jumlah destinasi wisata per kategori. Taman Hiburan memiliki jumlah terbanyak, diikuti oleh Budaya dan Cagar Alam. Kategori Bahari cukup signifikan, namun Tempat Ibadah dan Pusat Perbelanjaan memiliki jumlah yang paling sedikit. Hal ini membuat opsi wisata cenderung lebih kepada taman hiburan, budaya, dan alam, dibandingkan kategori lainnya.
+
    -  Distribusi Top 10 Destinasi Wisata
 
       ![Distribusi Top 10](https://raw.githubusercontent.com/FebriAdha/Sistem-Rekomendasi-Destinasi-Wisata/refs/heads/main/images/top%2010%20destinasi%20wisata.png)
 
       Gambar 3. Distribusi Top 10 Destinasi Wisata
+
+      Berdasarkan informasi diatas, diketahui bahwa destinasi wisata dengan nama lokasi Gereja Perawan Maria Tak Berdosa Surabaya dengan rating tertinggi yaitu dengan jumlah diatas 400
 
 ### Data Preprocessing
 
