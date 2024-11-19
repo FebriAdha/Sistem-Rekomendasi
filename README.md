@@ -6,9 +6,9 @@
 
 ### Latar Belakang
 
-Indonesia, sebagai negara kepulauan terbesar di dunia, memiliki potensi pariwisata yang sangat kaya dan beragam. Dengan lebih dari 17.000 pulau yang luar biasa dan punya 50.000 kilometer garis pantai. Indonesia sendiri memiliki sejumlah destinasi wisata populer yang menawarkan keindahan alam, antara lain Bali, hutan tropis di Sumatera dan Kalimantan, serta kawasan cagar alam orang utan di Kalimantan. Tak ketinggalan, ada juga Taman Nasional Komodo yang menjadi salah satu situs warisan dunia UNESCO. [1]. Sektor pariwisata di Indonesia tidak hanya berfungsi sebagai sumber pendapatan devisa negara, tetapi juga berperan penting dalam meningkatkan kesejahteraan masyarakat lokal dan pelestarian lingkungan [2].
+Indonesia, sebagai negara kepulauan terbesar di dunia, memiliki potensi pariwisata yang sangat kaya dan beragam. Dengan lebih dari 17.000 pulau yang luar biasa dan punya 50.000 kilometer garis pantai. Indonesia sendiri memiliki sejumlah destinasi wisata populer yang menawarkan keindahan alam, antara lain Bali, hutan tropis di Sumatera dan Kalimantan, serta kawasan cagar alam orang utan di Kalimantan. Tak ketinggalan, ada juga Taman Nasional Komodo yang menjadi salah satu situs warisan dunia UNESCO. [[1]](https://dispar.kaltimprov.go.id/2023/02/15/indonesia-negara-terindah-no-1-dunia/). Sektor pariwisata di Indonesia tidak hanya berfungsi sebagai sumber pendapatan devisa negara, tetapi juga berperan penting dalam meningkatkan kesejahteraan masyarakat lokal dan pelestarian lingkungan [[2]](https://repository.unsimar.ac.id/1299/4/BAB%20I.pdf).
 
-Berdasarkan jumlah kunjungan wisatawan mancanegara ke Indonesia melalui seluruh pintu masuk bulan Januari 2024 sebesar 927.746 terdiri dari 760.036 kunjungan atau 81,93% melalui pencatatan imigrasi dan 167.710 kunjungan atau 18,07% melalui pencatatan Mobile Positioning Data pada pintu masuk perbatasan [3]. Dalam daftar yang dirilis World Economic Forum (WEF) pada 21 Mei 2024, posisi Indonesia kembali naik 10 peringkat, dari rangking 32 menjadi 22 dunia. Berdasarkan data TTDI 2024, Indonesia mendapat skor 4,46 dengan posisi sembilan peringkat di bawah Singapura yang meraih skor 4,76 dan berada di ranking 13 [4]. 
+Berdasarkan jumlah kunjungan wisatawan mancanegara ke Indonesia melalui seluruh pintu masuk bulan Januari 2024 sebesar 927.746 terdiri dari 760.036 kunjungan atau 81,93% melalui pencatatan imigrasi dan 167.710 kunjungan atau 18,07% melalui pencatatan Mobile Positioning Data pada pintu masuk perbatasan [[3]](https://kemenparekraf.go.id/direktori-statistik/statistik-kunjungan-wisatawan-mancanegara-bulan-januari-2024). Dalam daftar yang dirilis World Economic Forum (WEF) pada 21 Mei 2024, posisi Indonesia kembali naik 10 peringkat, dari rangking 32 menjadi 22 dunia. Berdasarkan data TTDI 2024, Indonesia mendapat skor 4,46 dengan posisi sembilan peringkat di bawah Singapura yang meraih skor 4,76 dan berada di ranking 13 [[4]](https://www.liputan6.com/lifestyle/read/5602060/indeks-pariwisata-indonesia-ranking-ke-22-dunia-pada-2024-kembali-lampaui-malaysia-dan-thailand?page=4). 
 
 Untuk memaksimalkan potensi ini, dengan menerapan pengembangan sistem rekomendasi destinasi wisata, menjadi langkah strategis yang dapat diambil. Sistem rekomendasi memungkinkan wisatawan untuk mendapatkan rekomendasi destinasi, akomodasi, dan aktivitas yang sesuai dengan preferensi dan kebutuhan mereka.
 
@@ -36,7 +36,7 @@ Untuk mencapai goals yang telah ditetapkan, berikut adalah solusi yang akan dite
    - Mempersiapkan data dengan preprocessing dan preparation agar dapat dimodelkan dengan sistem rekomendasi yang sesuai.
 2. Modeling
    - Melakukan pembuatan model sistem rekomendasi berbasis _Content-Based Filtering_ untuk merekomendasikan destinasi wisata berdasarkan kategori yang sesuai.
-   - Melakukan pembuatan model sistem rekomendasi berbasis _Collaborative Filtering_ untuk merekomendasikan destinasi wisata berdasarkan perilaku pengguna dalam memberikan ulasan pada destinasi wisata.
+   - Melakukan pembuatan model sistem rekomendasi berbasis _Collaborative Filtering_ untuk merekomendasikan destinasi wisata berdasarkan perilaku pengguna dalam memberikan rating pada destinasi wisata.
 
 ## Data Understanding
 
@@ -48,13 +48,13 @@ Dataset yang digunakan dalam proyek ini adalah dataset [Indonesia Tourism Destin
 
 Kemudian dilakukan proses Exploratory Data Analysis (EDA) yang merupakan proses investigasi awal pada data untuk menganalisis karakteristik, menemukan pola, anomali, dan memeriksa asumsi pada data.
 
-### Variabel-variabel pada Destinasi Wisata Indonesia
+**Variabel-variabel pada Destinasi Wisata Indonesia**
 
 - **tourism_ with _id** : berisi informasi tempat wisata di 5 kota besar di Indonesia yang berjumlah ~400
 - **tourism_rating** : berisi 3 kolom yaitu user, tempat, dan rating yang diberikan, berfungsi untuk membuat sistem rekomendasi berdasarkan rating yang diberikan
 - **user** : yang berisi data pengguna dummy untuk membuat fitur rekomendasi berdasarkan pengguna
 
-### Deskripsi Variabel
+**Deskripsi Variabel**
 
 1. Deskripsi Variabel `tourism_ with _id`
 
@@ -144,6 +144,39 @@ Kemudian dilakukan proses Exploratory Data Analysis (EDA) yang merupakan proses 
      - `Place_Id` : Identitas destinasi wisata.
      - `Place_Ratings` : Rating yang diberikan oleh pengguna kepada destinasi wisata
 
+4. Visualisasi Data
+
+   - Distribusi Rating Destinasi Wisata
+
+     ![Distribusi rating](https://raw.githubusercontent.com/FebriAdha/Sistem-Rekomendasi-Destinasi-Wisata/refs/heads/main/images/destribusi%20rating.png)
+
+     Gambar 1. Distribusi Rating Destinasi Wisata.
+
+   - Jumlah destinasi wisata menurut kategori
+
+     ![Jumlah destinasi](https://raw.githubusercontent.com/FebriAdha/Sistem-Rekomendasi-Destinasi-Wisata/refs/heads/main/images/jumlah%20destinasi%20wisata.png)
+
+     Gambar 2.  Jumlah destinasi wisata per kategori
+
+   -  Distribusi Top 10 Destinasi Wisata
+
+      ![Distribusi Top 10](https://raw.githubusercontent.com/FebriAdha/Sistem-Rekomendasi-Destinasi-Wisata/refs/heads/main/images/top%2010%20destinasi%20wisata.png)
+
+      Gambar 3. Distribusi Top 10 Destinasi Wisata
+
+### Data Preprocessing
+
+Seperti yang sudah diketahui berdasarkan tahapan data understanding bahwa Indonesia Tourism Destination Dataset terdiri dari 3 file terpisah yaitu tourism_ with _id, user, dan tourism_rating. Pada tahap ini, akan dilakukan proses penggabungan file menjadi satu kesatuan file agar sesuai dengan pengembangan model yang ingin dibuat. Variabel setelah dilakukan penggabungan menjadi 6 variabel dengan 10.000 baris data. Tampilan Dataset bisa dilihat pada Tabel 4, dataset inilah yang akan digunakan untuk membuat sistem rekomendasi.
+
+Tabel 4. Tampilan dari dataset yang sudah dilakukan proses penggabungan antara variabel tourism_rating dan tourism_with_id
+|	 | User_Id | Place_Id | Place_Ratings | Place_Name                    | Category      | Price |
+|---|---------|----------|---------------|-------------------------------|---------------|-------|
+| 0 |	1	     | 179	    | 3	           | Candi Ratu Boko               | Budaya        | 75000 |
+| 1 |	1	     | 344	    | 2	           | Pantai Marina	                | Bahari	     | 3000  |
+| 2 |	1	     | 5	       | 5	           | Atlantis Water Adventure      | Taman_Hiburan | 94000 |
+| 3 |	1	     | 373	    | 3	           | Museum Kereta Ambarawa	       | Budaya        | 10000 |
+| 4 |	1	     | 101	    | 4	           | Kampung Wisata Sosro Menduran |	Budaya        | 0     |
+
 ## Data Preparation
 
 Pada tahap data preparation, dilakukan serangkaian langkah untuk memastikan bahwa data yang digunakan dalam proses pemodelan bersih, terstruktur, dan siap untuk dianalisis.
@@ -171,9 +204,9 @@ Output:
 
 ### 2. Menyamakan nama tempat wisata
 
-Sebelum masuk tahap pemodelan, diperlukan proses menyamakan nama tempat wisata berdasarkan Place_Id-nya. Jika terdapat Place_Id yang sama pada lebih dari satu nama tempat dapat menyebabkan bias pada data. Oleh karena itu harus dipastikan bahwa hanya terdapat satu Place_Id pada satu nama tempat saja. Pada proses ini dilakukan pengecekan ulang data setelah proses cleaning pada tahap sebelumnya. Berdasarkan informasi pada dataset, diketahui bahwa jumlah Place_Id dengan jumlah nama tempat wisata tidak sama, artinya terdapat Place_Id yang sama pada lebih dari satu nama tempat wisata. Oleh karena itu, diatasi dengan mengubah datasetnya menjadi data unik sehingga nantinya siap dimasukkan ke dalam proses pemodelan dengan cara membuang data duplikat pada kolom 'Place_Id'. Setelah melewati proses menyamakan jumlah dari jenis buku berdasarkan Place_Id, dataset hanya tersisa 437 baris data. Tahap berikutnya yaitu dibuatkan dictionary untuk menentukan pasangan key-value pada data place_id, place_name, place_category, dan price yang sudah disiapkan sebelumnya untuk proses pengembangan model sistem rekomendasi berbasis konten (content-based filtering). Hasil pembuatan dictionary disimpan dalam variabel bernama tourism_new dan terlihat seperti pada Tabel 6.
+Sebelum masuk tahap pemodelan, diperlukan proses menyamakan nama tempat wisata berdasarkan Place_Id-nya. Jika terdapat Place_Id yang sama pada lebih dari satu nama tempat dapat menyebabkan bias pada data. Oleh karena itu harus dipastikan bahwa hanya terdapat satu Place_Id pada satu nama tempat saja. Pada proses ini dilakukan pengecekan ulang data setelah proses cleaning pada tahap sebelumnya. Berdasarkan informasi pada dataset, diketahui bahwa jumlah Place_Id dengan jumlah nama tempat wisata tidak sama, artinya terdapat Place_Id yang sama pada lebih dari satu nama tempat wisata. Oleh karena itu, diatasi dengan mengubah datasetnya menjadi data unik sehingga nantinya siap dimasukkan ke dalam proses pemodelan dengan cara membuang data duplikat pada kolom 'Place_Id'. Setelah melewati proses menyamakan jumlah dari jenis buku berdasarkan Place_Id, dataset hanya tersisa 437 baris data. Tahap berikutnya yaitu dibuatkan dictionary untuk menentukan pasangan key-value pada data place_id, place_name, place_category, dan price yang sudah disiapkan sebelumnya untuk proses pengembangan model sistem rekomendasi berbasis konten (content-based filtering). Hasil pembuatan dictionary disimpan dalam variabel bernama tourism_new dan terlihat seperti pada Tabel 5.
 
-Tabel 6. Tampilan tourism_new setelah mengatasi missing value dan menyamakan nama tempat wisata
+Tabel 5. Tampilan tourism_new setelah mengatasi missing value dan menyamakan nama tempat wisata
 |	 | id	 | place_name	                  | category      | price |
 |---|-----|-------------------------------|---------------|-------|
 | 0 |	179 |	Candi Ratu Boko               | Budaya	       | 75000 |
@@ -211,23 +244,31 @@ Kekurangan teknik Content Based Filtering:
 
    Setelah dibawa ke dalam bentuk matriks, akan didapatkan nilai-nilai untuk setiap tempat wisata berdasarkan kategorinya. Salah satu contohnya adalah seperti berikut.
 
-   | place_name             | bahari | budaya | cagar_alam | pusat_perbelanjaan | taman_hiburan | tempat_ibadah |
-   |------------------------|--------|--------|------------|--------------------|---------------|---------------|	
-   | Kampung Pelangi        | 0.0    | 0.0    | 0.0        | 0.0                | 1.0           | 0.0           |
-   | Galaxy Waterpark Jogja | 0.0    | 0.0    | 0.0        | 0.0                | 1.0           | 0.0           |
-   | Pintoe Langit Dahromo  | 0.0    | 0.0    | 1.0        | 0.0                | 0.0           | 0.0           |
+   Tabel 6. TF-IDF Vectorizer
+   | place_name                         | bahari | budaya | cagar_alam | pusat_perbelanjaan | taman_hiburan | tempat_ibadah |
+   |------------------------------------|--------|--------|------------|--------------------|---------------|---------------|
+   | Pantai Samas	                      | 1.0    |	0.0    |	0.0        | 0.0	              | 0.0	         | 0.0           |
+   | Sunrise Point Cukul	             | 0.0    |	0.0    |	1.0	     | 0.0	              | 0.0	         | 0.0           |
+   | Pantai Ancol	                      | 1.0    |	0.0    |	0.0	     | 0.0	              | 0.0	         | 0.0           |
+   | Taman Budaya Yogyakarta            |	0.0    |	1.0    |	0.0	     | 0.0	              | 0.0	         | 0.0           |
 
-   Output matriks tf-idf di atas menunjukkan Taman Kasmaran memiliki kategori taman hiburan. Hal ini terlihat dari nilai matriks 1.0 pada kategori taman hiburan. Selanjutnya, Watu Lumbung termasuk dalam kategori cagar alam. Sedangkan, Masjid Kapal Semarang termasuk dalam kategori tempat ibadah.
+   Output matriks tf-idf di atas menunjukkan Pantai Samas memiliki kategori bahari. Hal ini terlihat dari nilai matriks 1.0 pada kategori bahari. Selanjutnya, Sunrise Point Cukul termasuk dalam kategori cagar alam. Sedangkan, Taman Budaya Yogyakarta termasuk dalam kategori budaya.
 
-2. **Menggunakan Cosine Similarity**
+3. **Menggunakan Cosine Similarity**
 
    Pada tahap sebelumnya, sudah berhasil mengidentifikasi korelasi antara nama tempat wisata dengan kategori wiasata. Sekarang, kita akan menghitung derajat kesamaan (similarity degree) antar nama tempat wisata dengan teknik cosine similarity. Di sini, kita menggunakan fungsi cosine_similarity dari library sklearn.
 
-   ||
+   Tabel 7. Cosine Similarity
+   | place_name                            | Taman Suropati | Monumen Bandung Lautan Api | Grand Indonesia Mall | Kampoeng Rawa |	Bukit Wisata Pulepayung |
+   |---------------------------------------|----------------|----------------------------|----------------------|---------------|-------------------------|
+   | Museum Sepuluh Nopember Kota Surabaya | 0.0	           | 1.0	                      | 0.0	               | 0.0	          | 0.0                     |
+   | Monumen Palagan Ambarawa	            | 0.0	           | 1.0	                      | 0.0	               | 0.0	          | 0.0                     |
+   | Taman Ayodya	                        | 1.0	           | 0.0	                      | 0.0	               | 0.0	          | 0.0                     |
+   | Hutan Mangrove Kulon Progo            | 0.0	           | 0.0	                      | 0.0	               | 0.0	          | 0.0                     |
+   
+   Perhatikanlah output matriks di atas. Angka 1.0 mengindikasikan bahwa nama tempat wista pada kolom X (horizontal) memiliki kesamaan dengan nama tempat wisata pada baris Y (vertikal). Sebagai contoh, Museum Sepuluh Nopember Kota Surabaya dan Monumen Palagan Ambarawa teridentifikasi sama (similar) dengan Monumen Bandung Lautan Api. Contoh lain, Taman Ayodya mirip dengan Taman Suropati.
 
-   Perhatikanlah output matriks di atas. Angka 1.0 mengindikasikan bahwa nama tempat wista pada kolom X (horizontal) memiliki kesamaan dengan nama tempat wisata pada baris Y (vertikal). Sebagai contoh, Taman Senjata dan Museum Layang-layang teridentifikasi sama (similar) dengan Museum Taman Prasasti. Contoh lain, Pulau Pelangi mirip dengan Pulau Pari.
-
-3. **Mendapatkan rekomendasi**
+5. **Mendapatkan rekomendasi**
 
    Pada tahap ini, akan dibuatkan sebuah fungsi bernama wisata_recommendations dengan beberapa parameter sebagai berikut:
    - place_name : nama tempat wisata (index kemiripan dataframe).
@@ -237,13 +278,23 @@ Kekurangan teknik Content Based Filtering:
    
    Fungsi wisata_recommendation adalah fungsi yang dibuat untuk menampilkan hasil rekomendasi berbasis konten berupa nama tempat wisata dengan kategori yang sama dengan nama tempat wisata yang pernah ditelusuri oleh pengguna. Sebelum fungsi dibuat, perlu diingat bahwa definisi dari sistem rekomendasi yang menyatakan bahwa keluaran sistem adalah berupa top-N recommendation. Oleh karena itu, nantinya untuk mendapatkan rekomendasi perlu diberikan sejumlah rekomendasi nama tempat wisata pada pengguna yang diatur pada parameter k.
 
-   Pada fungsi wisata_recommendations digunakan juga fungsi argpartition() untuk proses pengambilan sejumlah nilai k tertinggi dari similarity data. Selanjutnya, mengambil data dari bobot (tingkat kesamaan) tertinggi ke terendah. Data ini dimasukkan ke dalam variabel bernama 'closest'. Berikutnya, perlu dihapus place_name yang dicari agar tidak muncul dalam daftar rekomendasi. Dalam kasus ini, akan dicari nama tempat wisata yang mirip dengan nama tempat wisata sebelumnya yang nanti di input dalam place_name, sehingga perlu drop place_name agar tidak muncul dalam daftar rekomendasi yang diberikan nanti. Contoh nama tempat wisata yang digunakan terlihat pada Tabel 9.
+   Pada fungsi wisata_recommendations digunakan juga fungsi argpartition() untuk proses pengambilan sejumlah nilai k tertinggi dari similarity data. Selanjutnya, mengambil data dari bobot (tingkat kesamaan) tertinggi ke terendah. Data ini dimasukkan ke dalam variabel bernama 'closest'. Berikutnya, perlu dihapus place_name yang dicari agar tidak muncul dalam daftar rekomendasi. Dalam kasus ini, akan dicari nama tempat wisata yang mirip dengan nama tempat wisata sebelumnya yang nanti di input dalam place_name, sehingga perlu drop place_name agar tidak muncul dalam daftar rekomendasi yang diberikan nanti. Contoh nama tempat wisata yang digunakan terlihat pada Tabel 8.
 
-   Tabel 9.
+   Tabel 8. Contoh nama tempat destinasi yang digunakan untuk menampilkan rekomendasi
+   |	   | id  | place_name        | category | price |
+   |-----|-----|-------------------|----------|-------|
+   | 357 | 172 | Pantai Indrayanti | Bahari   | 10000 |
 
-   Pada Tabel 9, terlihat bahwa nama tempat wisata 'Entering the Silence : Becoming a Monk and a Writer (The Journals of Thomas Merton, V. 2)' yang ditulis oleh 'Thomas Merton'. Selanjutnya, digunakan fungsi wisata_recommendations untuk menampilkan rekomendasi 5 destinasi wisata teratas yang direkomendasikan sistem berdasarkan nama tempat wisata di Tabel 9. Hasilnya terlihat pada Tabel 10.
+   Pada Tabel 8, terlihat bahwa nama tempat wisata 'Pantai Indrayanti' dengan kategori 'Bahari'. Selanjutnya, digunakan fungsi wisata_recommendations untuk menampilkan rekomendasi 5 destinasi wisata teratas yang direkomendasikan sistem berdasarkan nama tempat wisata di Tabel 8. Hasilnya terlihat pada Tabel 9.
 
-   Tabel 10.
+   Tabel 9. Hasil rekomendasi 5 nama tempat destinasi teratas dengan kateogri
+   |	 | place_name          | category | price |
+   |---|---------------------|----------|-------|
+   | 0 |	Pantai Ngrenehan    | Bahari   | 3000  |
+   | 1 |	Pantai Drini        | Bahari   | 10000 |
+   | 2 |	Pantai Pulang Sawal | Bahari   | 10000 |
+   | 3 |	Pantai Ancol        | Bahari   | 25000 |
+   | 4 |	Pantai Krakal       | Bahari   | 10000 |
 
 ### Model Development dengan Collaborative Filtering
 
@@ -277,13 +328,100 @@ Kekurangan Collaborative Filtering:
 
 4. **Mendapatkan Rekomendasi Destinasi Wisata**
 
-   Untuk mendapatkan rekomendasi destinasi wisata, pertama diambil sampel user secara acak dan definisikan variabel place_not_readed yang merupakan daftar destinasi wiasata yang belum pernah dikunjungi oleh pengguna. variabel place_not_readed inilah yang akan menjadi destinasi wisata yang direkomendasikan oleh sistem. Variabel place_bot_visited diperoleh dengan menggunakan operator bitwise (~) pada variabel place_readed_by_user. Selanjutnya, untuk memperoleh rekomendasi destinasi wiasata, digunakan fungsi model.predict() dari library Keras dan hasil output akan menampilkan top-N recommendation berdasarkan preferensi pengguna seperti terlihat pada Tabel 11 dan Tabel 12.
+   Untuk mendapatkan rekomendasi destinasi wisata, pertama diambil sampel user secara acak dan definisikan variabel `place_not_readed` yang merupakan daftar destinasi wiasata yang belum pernah dikunjungi oleh pengguna. variabel `place_not_readed` inilah yang akan menjadi destinasi wisata yang direkomendasikan oleh sistem. Variabel place_bot_visited diperoleh dengan menggunakan operator bitwise (~) pada variabel `place_readed_by_user`. Selanjutnya, untuk memperoleh rekomendasi destinasi wiasata, digunakan fungsi model.predict() dari library Keras dan hasil output akan menampilkan top-N recommendation berdasarkan preferensi pengguna seperti terlihat dibawah.
 
-   Berdasarkan Tabel 11 dan Tabel 12, model telah berhasil membuat rekomendasi kepada user. Hasil tersebut adalah rekomendasi untuk user dengan id 276798. Dari output tersebut, dapat dibandingkan antara 'Book with high ratings from user' dan 'Top 10 books recomendation' untuk user. Perhatikan, beberapa judul buku rekomendasi menyediakan nama penulis bukunya juga yang sesuai dengan rating user. Diperoleh 10 rekomendasi teratas buku yang disertai juga dengan nama penulisnya untuk user tersebut serta terdapat 1 judul buku yang merupakan buku dengan rating tertinggi dari user.
+   ```
+   Daftar rekomendasi untuk: User 86
+   ============================================= 
+
+   ------------------------------------------------------------
+   Destinasi wisata dengan rating paling tinggi dari user
+   ------------------------------------------------------------
+   Pulau Bidadari : Bahari
+   Taman Spathodea : Taman_Hiburan
+   Pasar Kebon Empring Bintaran : Pusat_Perbelanjaan
+   Taman Bunga Cihideung : Cagar_Alam
+   Kampung Pelangi : Taman_Hiburan
+
+   ------------------------------------------------------------
+   Top 10 Destinasi Wisata recommendation
+   ------------------------------------------------------------
+   1 . Kampoeng Tulip 
+     Taman_Hiburan , Harga Tiket Masuk  15000 , Rating Wisata  3.8 
+
+   2 . Selasar Sunaryo Art Space 
+     Taman_Hiburan , Harga Tiket Masuk  25000 , Rating Wisata  4.6 
+
+   3 . Teras Cikapundung BBWS 
+     Taman_Hiburan , Harga Tiket Masuk  0 , Rating Wisata  4.3 
+
+   4 . Museum Barli 
+     Budaya , Harga Tiket Masuk  15000 , Rating Wisata  4.4 
+
+   5 . Wisata Batu Kuda 
+     Cagar_Alam , Harga Tiket Masuk  10000 , Rating Wisata  4.4 
+
+   6 . Ciwangun Indah Camp Official 
+     Cagar_Alam , Harga Tiket Masuk  10000 , Rating Wisata  4.3 
+
+   7 . Curug Batu Templek 
+     Cagar_Alam , Harga Tiket Masuk  5000 , Rating Wisata  4.1 
+
+   8 . Taman Jomblo 
+     Taman_Hiburan , Harga Tiket Masuk  10000 , Rating Wisata  4.1 
+
+   9 . Masjid Agung Trans Studio Bandung 
+     Tempat_Ibadah , Harga Tiket Masuk  0 , Rating Wisata  4.8 
+
+   10 . Curug Cilengkrang 
+     Cagar_Alam , Harga Tiket Masuk  7500 , Rating Wisata  4.0 
+
+   =============================================
+   ```
+   
+
+   Berdasarkan output diatas, model telah berhasil membuat rekomendasi kepada user. Hasil tersebut adalah rekomendasi untuk user dengan id 86. Dari output tersebut, dapat dibandingkan antara 'Destinasi wisata dengan rating paling tinggi dari user' dan 'Top 10 Destinasi Wisata recommendation' untuk user. Perhatikan, beberapa destinasi wisata rekomendasi menyediakan nama tempat wisata juga yang sesuai dengan kategori, harga dan rating user. Diperoleh 10 top rekomendasi destinasi wisata yang disertai juga dengan kategori untuk user tersebut serta terdapat 1 destinasi wisata yang merupakan nama tempat wisata dengan kategori, harga, dan rating tertinggi dari user.
 
 ## Evaluation
 
+### Evaluasi Model dengan Content Based Filtering
 
+Metrik yang digunakan untuk mengevaluasi model dengan pendekatan content-based filtering pada proyek ini meliputi Precision, Recall, dan F1-Score. Ketiga metrik ini merupakan ukuran yang sering digunakan untuk menilai performa model rekomendasi. Precision mengukur rasio jumlah item relevan yang dihasilkan oleh model dibandingkan dengan total item yang direkomendasikan. Recall mengukur rasio jumlah item relevan yang dihasilkan oleh model dibandingkan dengan total item relevan yang seharusnya direkomendasikan. Sementara itu, F1-Score adalah metrik yang menggabungkan Precision dan Recall, memberikan nilai tunggal yang menunjukkan keseimbangan antara keduanya. Berikut adalah rumus untuk menghitung Precision, Recall, dan F1-Score pada model sistem rekomendasi berbasis konten:
+
+$$Precision = \frac{Jumlah\ item\ revelan\ yang\ dihasilkan}{Total\ item\ yang\ dihasilkan}$$
+
+$$Recall = \frac{Jumlah\ item\ relevan\ yang\ dihasilkan}{Total\ item\ yang\ seharusnya\ direkomendasikan}$$
+
+$$F1\ Score = 2 * \frac{Precision * Recall}{Precision + Recall}$$
+
+Sebelum menghitung nilai evaluasi menggunakan metrik Precision, Recall, dan F1-Score, diperlukan data referensi yang berfungsi sebagai acuan untuk menilai hasil prediksi model. Data ini dikenal sebagai data ground truth. Dalam proyek ini, data ground truth dibuat berdasarkan derajat kesamaan yang dihitung menggunakan teknik cosine similarity. Setiap baris dan kolom pada dataframe mewakili judul buku, sementara nilai pada setiap sel menunjukkan label. Nilai 1 digunakan untuk menandai item yang similar (mirip), dan nilai 0 untuk item yang tidak similar. Nilai ambang batas atau threshold ditetapkan sebesar 0.5 pada proyek ini. Nilai threshold ini disesuaikan dengan kebutuhan dan karakteristik setelah melihat hasil rekomendasi sebelumnya. Lalu dibuatkan matriks ground truth menggunakan fungsi np.where() dari NumPy. Matriks ini akan memiliki nilai 1 di posisi di mana nilai cosine similarity antara dua item lebih besar atau sama dengan nilai threshold yang ditetapkan, dan nilai 0 di posisi di mana nilai similarity di bawah threshold. Kemudian, setelah matriks dibuat, hasilnya disajikan dalam bentuk dataframe. Baris dan kolom Dataframe ground truth ini diindeks menggunakan nama tempat wisata dari data.
+
+Terakhir, digunakan fungsi `precision_recall_fscore_support` untuk menghitung precision, recall, dan f1 score. Parameter average='binary' digunakan karena sedang mengukur kinerja dalam konteks klasifikasi biner (1 atau 0). Parameter 'zero_division=1' digunakan untuk menghindari pembagian dengan nol jika ada kelas yang tidak terdapat di prediksi. Hasil evaluasi metriks didapat adalah sebagai berikut:
+
+- Precision: 1.0
+- Recall: 1.0
+- F1-score: 1.0
+
+Berdasarkan hasil evaluasi, didapat nilai dari masing - masing metrik evaluasi yaitu precision, recall dan F1 Score. Nilai Precision didapat sebesar 1.0, artinya semua prediksi positif model adalah benar dan tidak terdapat false positive. Nilai recall didapat nilai 1.0 menunjukkan bahwa model berhasil mengidentifikasi sekitar 100% dari semua item yang sebenarnya relevan. Nilai F1 Score didapat sekitar 1.0 juga, ini menunjukkan keseimbangan yang baik antara precision dan recall dan model cenderung memberikan hasil yang sangat baik untuk kedua kelas (positif dan negatif). Kesimpulannya, berdasarkan hasil metrik evaluasi tersebut model bekerja dengan sangat baik dalam memberikan rekomendasi item dengan content based filtering.
+
+### Evaluasi Model dengan Collaborative Filtering
+
+Seperti yang sudah dilihat pada proses pelatihan model di bagian modeling. Metrik yang digunakan untuk melakukan evaluasi model pada model dengan Collaborative Filtering di proyek ini adalah Root Mean Squared Error (RMSE). RMSE adalah metrik evaluasi yang umum digunakan untuk mengukur seberapa baik model memprediksi nilai kontinu dengan membandingkan nilai prediksi dengan nilai sebenarnya. Dalam konteks collaborative filtering, RMSE biasanya digunakan untuk mengukur seberapa baik model kolaboratif dalam memprediksi preferensi pengguna terhadap item. RMSE didefinisikan dalam persamaan berikut:
+
+$$RMSE = \sqrt{\frac{1}{N} \Sigma_{i=1}^N({y_i}- y\_pred_i)^2}$$
+
+Keterangan:
+- N adalah jumlah prediksi.
+- yi adalah nilai sebenarnya dari preferensi pengguna terhadap item.
+- y_pred adalah prediksi model terhadap preferensi pengguna terhadap item.
+
+Berdasarkan hasil proses training model pada tahap modeling, diperoleh hasil pelatihan berupa informasi RMSE di data train dan validasi. Untuk melihat visualisai proses training model, dilakukan proses plot metrik evaluasi dengan matplotlib dan terlihat seperti Gambar 2.
+
+![model matrics](https://raw.githubusercontent.com/FebriAdha/Sistem-Rekomendasi-Destinasi-Wisata/refs/heads/main/images/model%20matrics.png)
+
+Gambar 4. Model Matrics
+
+Berdasarkan hasil visualisasi metrik evaluasi RMSE terhadap model yang dikembangkan, terlihat hasil model konvergen pada epochs sekitar 50 dan berdasarkan plot metriks model terlihat memberikan nilai MSE yang cukup kecil. Dari proses ini, diperoleh nilai error akhir sebesar 0.3288 dan error pada data validasi sebesar 0.3461. Nilai tersebut menunjukkan hasil yang cukup baik untuk sistem rekomendasi yang dihasilkan. Semakin kecil nilai RMSE, semakin baik model dalam memprediksi preferensi pengguna terhadap item. Hal inilah yang menyebabkan hasil rekomendasi dari model cukup akurat.
 
 ## Referensi
 
