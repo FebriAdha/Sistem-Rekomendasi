@@ -173,7 +173,11 @@ Kemudian dilakukan proses Exploratory Data Analysis (EDA) yang merupakan proses 
 
       Berdasarkan informasi diatas, diketahui bahwa destinasi wisata dengan nama lokasi Gereja Perawan Maria Tak Berdosa Surabaya dengan rating tertinggi yaitu dengan jumlah diatas 400
 
-### Data Preprocessing
+## Data Preparation
+
+Pada tahap data preparation, dilakukan serangkaian langkah untuk memastikan bahwa data yang digunakan dalam proses pemodelan bersih, terstruktur, dan siap untuk dianalisis.
+
+### 1. Data Preprocessing
 
 Seperti yang sudah diketahui berdasarkan tahapan data understanding bahwa Indonesia Tourism Destination Dataset terdiri dari 3 file terpisah yaitu tourism_ with _id, user, dan tourism_rating. Pada tahap ini, akan dilakukan proses penggabungan file menjadi satu kesatuan file agar sesuai dengan pengembangan model yang ingin dibuat. Variabel setelah dilakukan penggabungan menjadi 6 variabel dengan 10.000 baris data. Tampilan Dataset bisa dilihat pada Tabel 4, dataset inilah yang akan digunakan untuk membuat sistem rekomendasi.
 
@@ -186,15 +190,7 @@ Tabel 4. Tampilan dari dataset yang sudah dilakukan proses penggabungan antara v
 | 3 |	1	     | 373	    | 3	           | Museum Kereta Ambarawa	       | Budaya        | 10000 |
 | 4 |	1	     | 101	    | 4	           | Kampung Wisata Sosro Menduran |	Budaya        | 0     |
 
-## Data Preparation
-
-Pada tahap data preparation, dilakukan serangkaian langkah untuk memastikan bahwa data yang digunakan dalam proses pemodelan bersih, terstruktur, dan siap untuk dianalisis.
-
-Pada tahap ini di akan dilakukan beberapa teknik untuk mempersiapkan data seperti:
-- Mengatasi missing value.
-- Menyamakan nama tempat wisata.
-
-### 1. Mengatasi missing value.
+### 2. Mengatasi missing value.
      
 Pertama dilakukan pengecekan missing value menggunakan kode berikut: `all_tourism.isnull().sum()`. Dari kode tersebut diketahui tidak terdapat missing value pada semua fitur. Pengecekan terhadap missing value menunjukkan hasil sebagai berikut:
 
@@ -211,7 +207,7 @@ Output:
 | Category      | 0 |
 | Price         | 0 |
 
-### 2. Menyamakan nama tempat wisata
+### 3. Menyamakan nama tempat wisata
 
 Sebelum masuk tahap pemodelan, diperlukan proses menyamakan nama tempat wisata berdasarkan Place_Id-nya. Jika terdapat Place_Id yang sama pada lebih dari satu nama tempat dapat menyebabkan bias pada data. Oleh karena itu harus dipastikan bahwa hanya terdapat satu Place_Id pada satu nama tempat saja. Pada proses ini dilakukan pengecekan ulang data setelah proses cleaning pada tahap sebelumnya. Berdasarkan informasi pada dataset, diketahui bahwa jumlah Place_Id dengan jumlah nama tempat wisata tidak sama, artinya terdapat Place_Id yang sama pada lebih dari satu nama tempat wisata. Oleh karena itu, diatasi dengan mengubah datasetnya menjadi data unik sehingga nantinya siap dimasukkan ke dalam proses pemodelan dengan cara membuang data duplikat pada kolom 'Place_Id'. Setelah melewati proses menyamakan jumlah dari jenis buku berdasarkan Place_Id, dataset hanya tersisa 437 baris data. Tahap berikutnya yaitu dibuatkan dictionary untuk menentukan pasangan key-value pada data place_id, place_name, place_category, dan price yang sudah disiapkan sebelumnya untuk proses pengembangan model sistem rekomendasi berbasis konten (content-based filtering). Hasil pembuatan dictionary disimpan dalam variabel bernama tourism_new dan terlihat seperti pada Tabel 5.
 
@@ -224,26 +220,9 @@ Tabel 5. Tampilan tourism_new setelah mengatasi missing value dan menyamakan nam
 | 3 |	373 |	Museum Kereta Ambarawa        | Budaya	       | 10000 |
 | 4 |	101 |	Kampung Wisata Sosro Menduran	| Budaya        |	0     |
 
-## Modeling
+### 4. Model Development dengan Content Based Filtering
 
-Dalam menyusun sistem rekomendasi destinasi wisata, dilakukan 2 pendekatan yaitu content based filtering dan collaborative filtering. Dengan content based filtering, dapat direkomendasikan destinasi wisata yang serupa berdasarkan lokasi yang pernah diulas oleh pengguna di masa lalu. Sementara itu, untuk collaborative filtering akan digunakan algoritma neural network RecommendationNet untuk menghasilkan serangkaian rekomendasi berdasarkan nilai-nilai ulasan yang ditinggalkan oleh pengguna pada berbagai destinasi wisata di masa lalu.
-
-### Model Development dengan Content Based Filtering
-
-Pada tahap ini, dikembangkan model dengan teknik Content Based Filtering. Content Based Filtering adalah salah satu pendekatan dalam sistem rekomendasi yang menggunakan informasi atau "konten" dari item atau pengguna untuk membuat rekomendasi. Ide dasarnya adalah mencocokkan preferensi pengguna dengan karakteristik atau konten dari item yang telah dilihat atau disukai oleh pengguna sebelumnya. Misalkan, jika seorang pengguna menyukai atau pernah mengunjungi ketempat wisata dengan nama "Pantai Indrayanti" dan tempat wisata tersebut memiliki fitur berupa kategori wisata yaitu "Bahari", maka sistem akan mencari tempat wisata lain dengan fitur serupa dan merekomendasikannya dalam bentuk top-N recommendation kepada pengguna tersebut.
-
-Kelebihan teknik Content Based Filtering:
-- Memberikan rekomendasi yang personal untuk setiap pengguna berdasarkan preferensi unik pengguna.
-- Cocok untuk mengatasi masalah cold-start (ketika sedikit data pengguna tersedia) dan dapat memberikan rekomendasi yang baik sejak awal.
-- Tidak tergantung pada data pengguna lain.
-- Cocok untuk item dengan fitur atau atribut yang mudah diukur atau diidentifikasi.
-
-Kekurangan teknik Content Based Filtering:
-- Tidak efektif dalam menangani kejutan, karena hanya merekomendasikan item yang serupa dengan yang sudah diketahui pengguna.
-- Kesulitan dalam menangkap preferensi yang kompleks atau dinamis dari pengguna, terutama jika item yang serupa tidak mencerminkan preferensi yang mendalam.
-- Ada risiko "filter bubble" di mana pengguna hanya menerima rekomendasi yang sesuai dengan preferensi pengguna yang sudah diketahui, tanpa diverifikasi.
-
-Pada model content based filtering yang digunakan, langkah-langkah pengerjaannya adalah sebagai berikut.
+Pada tahap ini, dilakukan beberapa langkah untuk menyiapkan data yang akan digunakan dalam model content-based filtering. Berikut langkah-langkah data preparation yang dilakukan:
 
 1. **Menggunakan TF-IDF Vectorizer**
 
@@ -289,39 +268,11 @@ Pada model content based filtering yang digunakan, langkah-langkah pengerjaannya
    
    Fungsi wisata_recommendation adalah fungsi yang dibuat untuk menampilkan hasil rekomendasi berbasis konten berupa nama tempat wisata dengan kategori yang sama dengan nama tempat wisata yang pernah ditelusuri oleh pengguna. Sebelum fungsi dibuat, perlu diingat bahwa definisi dari sistem rekomendasi yang menyatakan bahwa keluaran sistem adalah berupa top-N recommendation. Oleh karena itu, nantinya untuk mendapatkan rekomendasi perlu diberikan sejumlah rekomendasi nama tempat wisata pada pengguna yang diatur pada parameter k.
 
-   Pada fungsi wisata_recommendations digunakan juga fungsi argpartition() untuk proses pengambilan sejumlah nilai k tertinggi dari similarity data. Selanjutnya, mengambil data dari bobot (tingkat kesamaan) tertinggi ke terendah. Data ini dimasukkan ke dalam variabel bernama 'closest'. Berikutnya, perlu dihapus place_name yang dicari agar tidak muncul dalam daftar rekomendasi. Dalam kasus ini, akan dicari nama tempat wisata yang mirip dengan nama tempat wisata sebelumnya yang nanti di input dalam place_name, sehingga perlu drop place_name agar tidak muncul dalam daftar rekomendasi yang diberikan nanti. Contoh nama tempat wisata yang digunakan terlihat pada Tabel 8.
+   Pada fungsi wisata_recommendations digunakan juga fungsi argpartition() untuk proses pengambilan sejumlah nilai k tertinggi dari similarity data. Selanjutnya, mengambil data dari bobot (tingkat kesamaan) tertinggi ke terendah. Data ini dimasukkan ke dalam variabel bernama 'closest'. Berikutnya, perlu dihapus place_name yang dicari agar tidak muncul dalam daftar rekomendasi. Dalam kasus ini, akan dicari nama tempat wisata yang mirip dengan nama tempat wisata sebelumnya yang nanti di input dalam place_name, sehingga perlu drop place_name agar tidak muncul dalam daftar rekomendasi yang diberikan nanti. 
 
-   Tabel 8. Contoh nama tempat destinasi yang digunakan untuk menampilkan rekomendasi
-   |	   | id  | place_name        | category | price |
-   |-----|-----|-------------------|----------|-------|
-   | 357 | 172 | Pantai Indrayanti | Bahari   | 10000 |
+### 5. Model Development dengan Collaborative Filtering
 
-   Pada Tabel 8, terlihat bahwa nama tempat wisata 'Pantai Indrayanti' dengan kategori 'Bahari'. Selanjutnya, digunakan fungsi wisata_recommendations untuk menampilkan rekomendasi 5 destinasi wisata teratas yang direkomendasikan sistem berdasarkan nama tempat wisata di Tabel 8. Hasilnya terlihat pada Tabel 9.
-
-   Tabel 9. Hasil rekomendasi 5 nama tempat destinasi teratas dengan kateogri
-   |	 | place_name          | category | price |
-   |---|---------------------|----------|-------|
-   | 0 |	Pantai Ngrenehan    | Bahari   | 3000  |
-   | 1 |	Pantai Drini        | Bahari   | 10000 |
-   | 2 |	Pantai Pulang Sawal | Bahari   | 10000 |
-   | 3 |	Pantai Ancol        | Bahari   | 25000 |
-   | 4 |	Pantai Krakal       | Bahari   | 10000 |
-
-### Model Development dengan Collaborative Filtering
-
-Model sistem rekomendasi lainnya yang dapat digunakan adalah collaborative filtering. Dengan menggunakan model ini, dapat direkomendasikan item sesuai dengan preferensi pengguna di masa lalu. Hal ini sangat bermanfaat dalam sistem rekomendasi destinasi wisata, karena dengan melihat riwayat ulasan pengguna di masa lalu, kita dapat memberikan sistem rekomendasi yang lebih beragam dan tentunya sesuai dengan minat pengguna dilihat dari ulasan yang tinggi pada item tersebut. Pada proyek ini akan dibuat model collaborative filtering berdasarkan kesamaan antar pengguna (User-Based Collaborative Filtering).
-
-Kelebihan Collaborative Filtering:
-- Dapat memberikan rekomendasi yang sangat personal kepada pengguna karena memanfaatkan preferensi dan perilaku pengguna secara langsung.
-- Dapat mengidentifikasi pola tersembunyi dalam data interaksi pengguna.
-- Dapat menangkap data yang lebih kompleks dan dinamis.
-
-Kekurangan Collaborative Filtering:
-- Memerlukan data interaksi pengguna yang cukup untuk model belajar.
-- Rentan terhadap masalah sparsity jika data interaksi pengguna rendah.
-- Tidak cocok untuk pengguna baru yang belum memiliki interaksi (cold start).
-
-Pada model collaborative filtering yang digunakan, tahapannya adalah sebagai berikut.
+Pada tahap data preparation untuk model collaborative filtering, dilakukan beberapa langkah penting agar data siap digunakan dalam proses pelatihan model. Berikut adalah penjelasan langkah-langkah tersebut:
 
 1. **Persiapan data**
 
@@ -341,59 +292,111 @@ Pada model collaborative filtering yang digunakan, tahapannya adalah sebagai ber
 
 4. **Mendapatkan Rekomendasi Destinasi Wisata**
 
-   Untuk mendapatkan rekomendasi destinasi wisata, pertama diambil sampel user secara acak dan definisikan variabel `place_not_readed` yang merupakan daftar destinasi wiasata yang belum pernah dikunjungi oleh pengguna. variabel `place_not_readed` inilah yang akan menjadi destinasi wisata yang direkomendasikan oleh sistem. Variabel place_bot_visited diperoleh dengan menggunakan operator bitwise (~) pada variabel `place_readed_by_user`. Selanjutnya, untuk memperoleh rekomendasi destinasi wiasata, digunakan fungsi model.predict() dari library Keras dan hasil output akan menampilkan top-N recommendation berdasarkan preferensi pengguna seperti terlihat dibawah.
+   Untuk mendapatkan rekomendasi destinasi wisata, pertama diambil sampel user secara acak dan definisikan variabel `place_not_readed` yang merupakan daftar destinasi wiasata yang belum pernah dikunjungi oleh pengguna. variabel `place_not_readed` inilah yang akan menjadi destinasi wisata yang direkomendasikan oleh sistem. Variabel place_bot_visited diperoleh dengan menggunakan operator bitwise (~) pada variabel `place_readed_by_user`. Selanjutnya, untuk memperoleh rekomendasi destinasi wiasata, digunakan fungsi model.predict() dari library Keras dan hasil output akan menampilkan top-N recommendation berdasarkan preferensi pengguna.
 
-   ```
-   Daftar rekomendasi untuk: User 86
-   ============================================= 
+## Modeling and Result
 
-   ------------------------------------------------------------
-   Destinasi wisata dengan rating paling tinggi dari user
-   ------------------------------------------------------------
-   Pulau Bidadari : Bahari
-   Taman Spathodea : Taman_Hiburan
-   Pasar Kebon Empring Bintaran : Pusat_Perbelanjaan
-   Taman Bunga Cihideung : Cagar_Alam
-   Kampung Pelangi : Taman_Hiburan
+Dalam menyusun sistem rekomendasi destinasi wisata, dilakukan 2 pendekatan yaitu content based filtering dan collaborative filtering. Dengan content based filtering, dapat direkomendasikan destinasi wisata yang serupa berdasarkan lokasi yang pernah diulas oleh pengguna di masa lalu. Sementara itu, untuk collaborative filtering akan digunakan algoritma neural network RecommendationNet untuk menghasilkan serangkaian rekomendasi berdasarkan nilai-nilai ulasan yang ditinggalkan oleh pengguna pada berbagai destinasi wisata di masa lalu.
 
-   ------------------------------------------------------------
-   Top 10 Destinasi Wisata recommendation
-   ------------------------------------------------------------
-   1 . Kampoeng Tulip 
+### 1. Content Based Filtering
+
+Model yang digunakan pada Content-Based Filtering ini adalah model klasik yang memanfaatkan cosine similarity untuk menentukan kemiripan karakteristika antardestinasi. Pembangunan model dilakukan dengan menghitung cosine similarity dari matriks fitur. Setelah itu dibuat sebuah fungsi untuk memberikan rekomendasi dengan memanfaatkan data cosine similarity dan data masukan berupa nama tempat serta jumlah rekomendasi. Fungsi rekomendasi ini mengurutkan tempat-tempat selain masukan berdasarkan nilai cosine similarity yang terbesar. Fungsi rekomendasi ini kemudian akan mengembalikan dataframe dari top-n recommendation.
+
+Kelebihan teknik Content Based Filtering:
+- Memberikan rekomendasi yang personal untuk setiap pengguna berdasarkan preferensi unik pengguna.
+- Cocok untuk mengatasi masalah cold-start (ketika sedikit data pengguna tersedia) dan dapat memberikan rekomendasi yang baik sejak awal.
+- Tidak tergantung pada data pengguna lain.
+- Cocok untuk item dengan fitur atau atribut yang mudah diukur atau diidentifikasi.
+
+Kekurangan teknik Content Based Filtering:
+- Tidak efektif dalam menangani kejutan, karena hanya merekomendasikan item yang serupa dengan yang sudah diketahui pengguna.
+- Kesulitan dalam menangkap preferensi yang kompleks atau dinamis dari pengguna, terutama jika item yang serupa tidak mencerminkan preferensi yang mendalam.
+- Ada risiko "filter bubble" di mana pengguna hanya menerima rekomendasi yang sesuai dengan preferensi pengguna yang sudah diketahui, tanpa diverifikasi.
+
+**Output Model**
+
+Tabel 8. Contoh nama tempat destinasi yang digunakan untuk menampilkan rekomendasi
+|	   | id  | place_name        | category | price |
+|-----|-----|-------------------|----------|-------|
+| 357 | 172 | Pantai Indrayanti | Bahari   | 10000 |
+
+Tabel 9. Hasil rekomendasi 5 nama tempat destinasi teratas dengan kateogri
+|	 | place_name          | category | price |
+|---|---------------------|----------|-------|
+| 0 |	Pantai Ngrenehan    | Bahari   | 3000  |
+| 1 |	Pantai Drini        | Bahari   | 10000 |
+| 2 |	Pantai Pulang Sawal | Bahari   | 10000 |
+| 3 |	Pantai Ancol        | Bahari   | 25000 |
+| 4 |	Pantai Krakal       | Bahari   | 10000 |
+
+Berdasarkan output diatas, sistem berhasil merekomendasikan 5 nama tempat wisata teratas dengan kategori wisata 'category' yaitu 'Bahari' beserta harga tiket masuk.
+
+### 2. Collaborative Filtering
+
+Model yang digunakan dalam Collaborative Filtering ini adalah model Deep Learning dengan menggunakan Embedding Layer. Pembangunan model diawali dengan inisialisasi struktur layer pada kelas yang merupakan turunan dari kelas ff.keras.model. Inisialisasi dilakukan dengan membuat layer bias dan layer embedding dari fitur yang digunakan dalam collaborative filtering. Fitur yang digunakan adalah Place Id dan User Id. Setelah itu, definisikan method Call pada kelas untuk menerima input dan mengembalikan prediksi nilai rating dari user terhadap suatu tempat. Tahap ini melibatkan proses perkalian dot dari vector kedua atribut yang ditambah dengan kedua biasnya. Setelah siap, model akan dicompile agar dapat digunakan. Setelah itu, dilakukan training pada model menggunakan data train.
+
+Kelebihan Collaborative Filtering:
+- Dapat memberikan rekomendasi yang sangat personal kepada pengguna karena memanfaatkan preferensi dan perilaku pengguna secara langsung.
+- Dapat mengidentifikasi pola tersembunyi dalam data interaksi pengguna.
+- Dapat menangkap data yang lebih kompleks dan dinamis.
+
+Kekurangan Collaborative Filtering:
+- Memerlukan data interaksi pengguna yang cukup untuk model belajar.
+- Rentan terhadap masalah sparsity jika data interaksi pengguna rendah.
+- Tidak cocok untuk pengguna baru yang belum memiliki interaksi (cold start).
+
+**Output Model**
+
+```
+Daftar rekomendasi untuk: User 86
+============================================= 
+
+------------------------------------------------------------
+Destinasi wisata dengan rating paling tinggi dari user
+------------------------------------------------------------
+Pulau Bidadari : Bahari
+Taman Spathodea : Taman_Hiburan
+Pasar Kebon Empring Bintaran : Pusat_Perbelanjaan
+Taman Bunga Cihideung : Cagar_Alam
+Kampung Pelangi : Taman_Hiburan
+
+------------------------------------------------------------
+Top 10 Destinasi Wisata recommendation
+------------------------------------------------------------
+1 . Kampoeng Tulip 
      Taman_Hiburan , Harga Tiket Masuk  15000 , Rating Wisata  3.8 
 
-   2 . Selasar Sunaryo Art Space 
+2 . Selasar Sunaryo Art Space 
      Taman_Hiburan , Harga Tiket Masuk  25000 , Rating Wisata  4.6 
 
-   3 . Teras Cikapundung BBWS 
+3 . Teras Cikapundung BBWS 
      Taman_Hiburan , Harga Tiket Masuk  0 , Rating Wisata  4.3 
 
-   4 . Museum Barli 
+4 . Museum Barli 
      Budaya , Harga Tiket Masuk  15000 , Rating Wisata  4.4 
 
-   5 . Wisata Batu Kuda 
+5 . Wisata Batu Kuda 
      Cagar_Alam , Harga Tiket Masuk  10000 , Rating Wisata  4.4 
 
-   6 . Ciwangun Indah Camp Official 
+6 . Ciwangun Indah Camp Official 
      Cagar_Alam , Harga Tiket Masuk  10000 , Rating Wisata  4.3 
 
-   7 . Curug Batu Templek 
+7 . Curug Batu Templek 
      Cagar_Alam , Harga Tiket Masuk  5000 , Rating Wisata  4.1 
 
-   8 . Taman Jomblo 
+8 . Taman Jomblo 
      Taman_Hiburan , Harga Tiket Masuk  10000 , Rating Wisata  4.1 
 
-   9 . Masjid Agung Trans Studio Bandung 
+9 . Masjid Agung Trans Studio Bandung 
      Tempat_Ibadah , Harga Tiket Masuk  0 , Rating Wisata  4.8 
 
-   10 . Curug Cilengkrang 
+10 . Curug Cilengkrang 
      Cagar_Alam , Harga Tiket Masuk  7500 , Rating Wisata  4.0 
 
-   =============================================
-   ```
-   
+=============================================
+```
 
-   Berdasarkan output diatas, model telah berhasil membuat rekomendasi kepada user. Hasil tersebut adalah rekomendasi untuk user dengan id 86. Dari output tersebut, dapat dibandingkan antara 'Destinasi wisata dengan rating paling tinggi dari user' dan 'Top 10 Destinasi Wisata recommendation' untuk user. Perhatikan, beberapa destinasi wisata rekomendasi menyediakan nama tempat wisata juga yang sesuai dengan kategori, harga dan rating user. Diperoleh 10 top rekomendasi destinasi wisata yang disertai juga dengan kategori untuk user tersebut serta terdapat 1 destinasi wisata yang merupakan nama tempat wisata dengan kategori, harga, dan rating tertinggi dari user.
+Berdasarkan output diatas, model telah berhasil membuat rekomendasi kepada user. Hasil tersebut adalah rekomendasi untuk user dengan id 86. Dari output tersebut, dapat dibandingkan antara 'Destinasi wisata dengan rating paling tinggi dari user' dan 'Top 10 Destinasi Wisata recommendation' untuk user. Perhatikan, beberapa destinasi wisata rekomendasi menyediakan nama tempat wisata juga yang sesuai dengan kategori, harga dan rating user. Diperoleh 10 top rekomendasi destinasi wisata yang disertai juga dengan kategori untuk user tersebut serta terdapat 1 destinasi wisata yang merupakan nama tempat wisata dengan kategori, harga, dan rating tertinggi dari user.
 
 ## Evaluation
 
@@ -435,6 +438,10 @@ Berdasarkan hasil proses training model pada tahap modeling, diperoleh hasil pel
 Gambar 4. Model Matrics
 
 Berdasarkan hasil visualisasi metrik evaluasi RMSE terhadap model yang dikembangkan, terlihat hasil model konvergen pada epochs sekitar 50 dan berdasarkan plot metriks model terlihat memberikan nilai MSE yang cukup kecil. Dari proses ini, diperoleh nilai error akhir sebesar 0.3288 dan error pada data validasi sebesar 0.3461. Nilai tersebut menunjukkan hasil yang cukup baik untuk sistem rekomendasi yang dihasilkan. Semakin kecil nilai RMSE, semakin baik model dalam memprediksi preferensi pengguna terhadap item. Hal inilah yang menyebabkan hasil rekomendasi dari model cukup akurat.
+
+### Kesimpulan
+
+Sistem rekomendasi yang dibangun berhasil memberikan rekomendasi destinasi wisata yang relevan dengan akurasi yang baik. Content-based filtering efektif untuk merekomendasikan destinasi serupa, sementara collaborative filtering baik dalam memberikan rekomendasi personal berdasarkan preferensi pengguna.
 
 ## Referensi
 
