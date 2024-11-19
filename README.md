@@ -31,12 +31,15 @@ Tujuan dari proyek ini adalah:
 ### Solution statements
 
 Untuk mencapai goals yang telah ditetapkan, berikut adalah solusi yang akan diterapkan:
-1. Pengelolaan data
+1. **Pengelolaan data**
    - Mengumpulkan data destinasi wisata pada daerah yang sering dikunjungi oleh masyarakat.
    - Mempersiapkan data dengan preprocessing dan preparation agar dapat dimodelkan dengan sistem rekomendasi yang sesuai.
-2. Modeling
-   - Melakukan pembuatan model sistem rekomendasi berbasis _Content-Based Filtering_ untuk merekomendasikan destinasi wisata berdasarkan kategori yang sesuai.
-   - Melakukan pembuatan model sistem rekomendasi berbasis _Collaborative Filtering_ untuk merekomendasikan destinasi wisata berdasarkan perilaku pengguna dalam memberikan rating pada destinasi wisata.
+
+2. **Modeling**
+
+   Pada proses pengembangan model akan menggunakan dua metode sebagai berikut:
+   - **Model Development dengan Content Based Filtering**. Pada tahap ini, dikembangkan sistem rekomendasi dengan teknik Content Based Filtering. Teknik ini akan merekomendasikan destinasi wisata yang sesuai dengan nama tempat wisata dan kategori yang disukai pengguna di masa lalu. Pada tahap ini, akan dicari representasi fitur penting dari setiap kategori buku dengan TF-IDF (Term Frequency - Inverse Document Frequency) Vertorizer dan menghitung tingkat kesamaan (similarity measure) dengan cosine similarity. Setelah itu akan menghasilkan sejumlah rekomendasi destinasi wisata untuk pengguna berdasarkan kesamaan yang telah dihitung sebelumnya.
+   - **Model Development dengan Collaborative Filtering**. Pada tahap ini, dikembangan sistem rekomendasi dengan teknik Collaborative Filtering. Sistem nantinya akan merekomendasikan sejumlah destinasi wisata kepada pengguna berdasarkan rating yang telah diberikan sebelumnya. Dari data rating pengguna akan diidentifikasi nama - nama tempat wisata yang mirip dan belum pernah dikunjungi oleh pengguna lainnya.
 
 ## Data Understanding
 
@@ -234,6 +237,8 @@ Kekurangan teknik Content Based Filtering:
 - Kesulitan dalam menangkap preferensi yang kompleks atau dinamis dari pengguna, terutama jika item yang serupa tidak mencerminkan preferensi yang mendalam.
 - Ada risiko "filter bubble" di mana pengguna hanya menerima rekomendasi yang sesuai dengan preferensi pengguna yang sudah diketahui, tanpa diverifikasi.
 
+Pada model content based filtering yang digunakan, langkah-langkah pengerjaannya adalah sebagai berikut.
+
 1. **Menggunakan TF-IDF Vectorizer**
 
    TF-IDF Vectorizer digunakan untuk menemukan representasi fitur penting dari setiap kategori destinasi wisata. Dalam menggunakan TF-IDF Vectorizer, beberapa tahapnya adalah sebagai berikut.
@@ -309,6 +314,8 @@ Kekurangan Collaborative Filtering:
 - Memerlukan data interaksi pengguna yang cukup untuk model belajar.
 - Rentan terhadap masalah sparsity jika data interaksi pengguna rendah.
 - Tidak cocok untuk pengguna baru yang belum memiliki interaksi (cold start).
+
+Pada model collaborative filtering yang digunakan, tahapannya adalah sebagai berikut.
 
 1. **Persiapan data**
 
@@ -425,12 +432,12 @@ Berdasarkan hasil visualisasi metrik evaluasi RMSE terhadap model yang dikembang
 
 ## Referensi
 
-[1] M. Zaenal Arifin. (2023). "Indonesia Negara Terindah…. Nomor Satu di Dunia." Dinas Pariwisata Provinsi Kaltim (https://dispar.kaltimprov.go.id/2023/02/15/indonesia-negara-terindah-no-1-dunia/)
+[1] M. Zaenal Arifin, "Indonesia Negara Terindah…. Nomor Satu di Dunia," Dinas Pariwisata Provinsi Kaltim, (2023). (https://dispar.kaltimprov.go.id/2023/02/15/indonesia-negara-terindah-no-1-dunia/)
 
-[2] Tuwungkuya, Yudha Sagitama (2021). "STRATEGI PENGEMBANGAN PANTAI 1000 BINTANG SEBAGAI DESTINASI WISATA DI DESA MASANI KECAMATAN POSO PESISIR KABUPATEN POSO." Undergraduate thesis, UNIVERSITAS SINTUWU MAROSO.(https://repository.unsimar.ac.id/1299/4/BAB%20I.pdf)
+[2] Tuwungkuya, Yudha Sagitama, "STRATEGI PENGEMBANGAN PANTAI 1000 BINTANG SEBAGAI DESTINASI WISATA DI DESA MASANI KECAMATAN POSO PESISIR KABUPATEN POSO," Undergraduate thesis, UNIVERSITAS SINTUWU MAROSO, (2021).(https://repository.unsimar.ac.id/1299/4/BAB%20I.pdf)
 
-[3] Kementerian Pariwisata dan Ekonomi Kreatif. (2024). "Statistik Kunjungan Wisatawan Mancanegara Bulan Januari 2024." (https://kemenparekraf.go.id/direktori-statistik/statistik-kunjungan-wisatawan-mancanegara-bulan-januari-2024)
+[3] Kementerian Pariwisata dan Ekonomi Kreatif, "Statistik Kunjungan Wisatawan Mancanegara Bulan Januari 2024," (2024).(https://kemenparekraf.go.id/direktori-statistik/statistik-kunjungan-wisatawan-mancanegara-bulan-januari-2024)
 
-[4] Liputan6. (2024). "Indeks Pariwisata Indonesia Ranking ke-22 Dunia pada 2024, Kembali Lampaui Malaysia dan Thailand." (https://www.liputan6.com/lifestyle/read/5602060/indeks-pariwisata-indonesia-ranking-ke-22-dunia-pada-2024-kembali-lampaui-malaysia-dan-thailand?page=4)
+[4] Dinny Mutiah, "Indeks Pariwisata Indonesia Ranking ke-22 Dunia pada 2024, Kembali Lampaui Malaysia dan Thailand,"  Liputan6, (2024).(https://www.liputan6.com/lifestyle/read/5602060/indeks-pariwisata-indonesia-ranking-ke-22-dunia-pada-2024-kembali-lampaui-malaysia-dan-thailand?page=4)
 
 
